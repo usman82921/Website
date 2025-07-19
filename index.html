@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facebook Video Downloader</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -14,204 +13,146 @@
         }
         
         body {
-            background: linear-gradient(135deg, #1877f2, #4267b2);
-            color: #333;
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+            line-height: 1.6;
         }
         
         .container {
-            width: 100%;
             max-width: 800px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-            overflow: hidden;
-            margin: 40px 0;
+            margin: 0 auto;
+            padding: 20px;
         }
         
         header {
-            background: #1877f2;
-            color: white;
-            padding: 30px;
             text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
         }
         
-        header h1 {
-            font-size: 2.5rem;
+        h1 {
+            color: #1877f2;
             margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
         }
         
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
+        .description {
+            color: #65676b;
+            margin-bottom: 20px;
         }
         
-        .main-content {
-            padding: 30px;
-        }
-        
-        .input-section {
-            background: #f0f2f5;
-            border-radius: 12px;
-            padding: 25px;
+        .download-form {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
         }
         
         .input-group {
             display: flex;
-            gap: 10px;
             margin-bottom: 15px;
         }
         
-        .url-input {
+        input[type="url"] {
             flex: 1;
-            padding: 16px 20px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            padding: 12px 15px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px 0 0 6px;
+            font-size: 16px;
+            outline: none;
         }
         
-        .url-input:focus {
-            outline: none;
+        input[type="url"]:focus {
             border-color: #1877f2;
         }
         
-        .btn {
-            background: #1877f2;
+        button {
+            background-color: #1877f2;
             color: white;
             border: none;
-            padding: 16px 30px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 0 6px 6px 0;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
         }
         
-        .btn:hover {
-            background: #166fe5;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+        button:hover {
+            background-color: #166fe5;
         }
         
-        .btn:active {
-            transform: translateY(0);
-        }
-        
-        .note {
-            background: #e7f3ff;
-            border-left: 4px solid #1877f2;
-            padding: 15px;
-            border-radius: 4px;
-            font-size: 0.95rem;
-            margin-top: 20px;
-        }
-        
-        .note h3 {
-            margin-bottom: 8px;
-            color: #1877f2;
-        }
-        
-        .result-container {
+        .result {
             display: none;
-            background: #f0f2f5;
-            border-radius: 12px;
-            padding: 25px;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .result-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .result-header h2 {
-            color: #1877f2;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .video-info {
             display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
         }
         
-        .creator-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #1877f2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
+        .thumbnail {
+            width: 150px;
+            height: 150px;
+            border-radius: 4px;
+            object-fit: cover;
+            margin-right: 20px;
         }
         
-        .creator-info {
+        .video-details {
             flex: 1;
         }
         
-        .creator-info h3 {
-            font-size: 1.3rem;
-            margin-bottom: 5px;
+        .video-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .creator {
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        
+        .download-options {
+            margin-top: 20px;
         }
         
         .download-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
+            display: inline-block;
+            background-color: #42b72a;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
             text-decoration: none;
-            margin-top: 20px;
-            font-size: 1.2rem;
+            font-weight: 600;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .download-btn:hover {
+            background-color: #36a420;
         }
         
         .loading {
-            display: none;
             text-align: center;
-            padding: 30px;
+            display: none;
+            margin: 20px 0;
         }
         
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(24, 119, 242, 0.2);
-            border-top: 5px solid #1877f2;
+            border: 4px solid rgba(0, 0, 0, 0.1);
             border-radius: 50%;
+            border-top: 4px solid #1877f2;
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin: 0 auto 10px;
         }
         
         @keyframes spin {
@@ -220,77 +161,45 @@
         }
         
         .error {
+            color: #ff4d4f;
+            background-color: #fff2f0;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
             display: none;
-            background: #ffebee;
-            border-left: 4px solid #f44336;
-            padding: 20px;
-            border-radius: 4px;
-            margin-top: 20px;
-            color: #f44336;
-        }
-        
-        .how-to {
-            margin-top: 30px;
-            background: #f0f2f5;
-            border-radius: 12px;
-            padding: 25px;
-        }
-        
-        .how-to h2 {
-            margin-bottom: 20px;
-            color: #1877f2;
-            text-align: center;
-        }
-        
-        .steps {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-        
-        .step {
-            flex: 1;
-            min-width: 200px;
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-        
-        .step-number {
-            background: #1877f2;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-weight: bold;
         }
         
         footer {
             text-align: center;
-            padding: 20px;
-            color: white;
-            margin-top: auto;
-            width: 100%;
+            margin-top: 50px;
+            color: #65676b;
+            font-size: 14px;
         }
         
         @media (max-width: 600px) {
+            .video-info {
+                flex-direction: column;
+            }
+            
+            .thumbnail {
+                width: 100%;
+                height: auto;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
             .input-group {
                 flex-direction: column;
             }
             
-            .btn {
-                width: 100%;
+            input[type="url"] {
+                border-radius: 6px;
+                margin-bottom: 10px;
             }
             
-            header h1 {
-                font-size: 2rem;
+            button {
+                border-radius: 6px;
+                width: 100%;
             }
         }
     </style>
@@ -298,143 +207,144 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fab fa-facebook"></i> Facebook Video Downloader</h1>
-            <p>Download any Facebook video in high quality with just one click</p>
+            <h1>Facebook Video Downloader</h1>
+            <p class="description">Download high-quality videos from Facebook to your device</p>
         </header>
         
-        <div class="main-content">
-            <div class="input-section">
-                <h2>Paste Facebook Video URL</h2>
-                <div class="input-group">
-                    <input type="text" id="fb-url" class="url-input" placeholder="https://www.facebook.com/..." value="https://www.facebook.com/share/v/16itmznFpN/">
-                    <button id="download-btn" class="btn">
-                        <i class="fas fa-download"></i> Download
-                    </button>
-                </div>
-                
-                <div class="note">
-                    <h3><i class="fas fa-info-circle"></i> How to get video URL</h3>
-                    <p>1. Open Facebook and find the video you want to download<br>
-                    2. Click on the three dots (...) in the top right corner of the video<br>
-                    3. Select "Copy link" or "Copy video URL"</p>
+        <div class="download-form">
+            <div class="input-group">
+                <input type="url" id="fb-url" placeholder="Paste Facebook video URL here..." required>
+                <button id="download-btn">Download</button>
+            </div>
+            <div class="error" id="error-message"></div>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Fetching video information...</p>
+        </div>
+        
+        <div class="result" id="result">
+            <div class="video-info">
+                <img src="https://via.placeholder.com/150" alt="Video thumbnail" class="thumbnail" id="thumbnail">
+                <div class="video-details">
+                    <h3 class="video-title" id="video-title">Facebook Video</h3>
+                    <p class="creator" id="video-creator"></p>
                 </div>
             </div>
             
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <p>Processing your video link...</p>
-            </div>
-            
-            <div class="error" id="error"></div>
-            
-            <div class="result-container" id="result-container">
-                <div class="result-header">
-                    <h2><i class="fas fa-video"></i> Video Ready to Download</h2>
-                </div>
-                
-                <div class="video-info">
-                    <div class="creator-avatar">HA</div>
-                    <div class="creator-info">
-                        <h3 id="creator">@Hillary Abigail</h3>
-                        <p>Your video is ready for download</p>
-                    </div>
-                </div>
-                
-                <a href="#" id="download-link" class="btn download-btn">
-                    <i class="fas fa-download"></i> Download Video
-                </a>
-            </div>
-            
-            <div class="how-to">
-                <h2>How to Download Facebook Videos</h2>
-                <div class="steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <p>Copy the Facebook video URL</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <p>Paste the URL in the input field above</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <p>Click the Download button</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <p>Get your video download link</p>
-                    </div>
-                </div>
+            <div class="download-options" id="download-options">
+                <h3>Download Options:</h3>
+                <div id="buttons-container"></div>
             </div>
         </div>
+        
+        <footer>
+            <p>© 2023 Facebook Video Downloader. This tool is for personal use only.</p>
+        </footer>
     </div>
     
-    <footer>
-        <p>&copy; 2023 Facebook Video Downloader | All rights reserved</p>
-    </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const downloadBtn = document.getElementById('download-btn');
             const fbUrlInput = document.getElementById('fb-url');
-            const loading = document.getElementById('loading');
-            const resultContainer = document.getElementById('result-container');
-            const errorDiv = document.getElementById('error');
-            const creatorName = document.getElementById('creator');
-            const downloadLink = document.getElementById('download-link');
+            const resultDiv = document.getElementById('result');
+            const loadingDiv = document.getElementById('loading');
+            const errorDiv = document.getElementById('error-message');
+            const thumbnailImg = document.getElementById('thumbnail');
+            const videoTitle = document.getElementById('video-title');
+            const videoCreator = document.getElementById('video-creator');
+            const buttonsContainer = document.getElementById('buttons-container');
             
-            downloadBtn.addEventListener('click', function() {
+            downloadBtn.addEventListener('click', fetchVideoInfo);
+            
+            function fetchVideoInfo() {
                 const fbUrl = fbUrlInput.value.trim();
                 
-                // Hide previous results/errors
-                resultContainer.style.display = 'none';
-                errorDiv.style.display = 'none';
-                
-                // Validate URL
                 if (!fbUrl) {
                     showError('Please enter a Facebook video URL');
                     return;
                 }
                 
-                if (!fbUrl.includes('facebook.com')) {
-                    showError('Please enter a valid Facebook URL');
+                // Validate Facebook URL
+                if (!isValidFacebookUrl(fbUrl)) {
+                    showError('Please enter a valid Facebook video URL');
                     return;
                 }
                 
-                // Show loading
-                loading.style.display = 'block';
+                // Show loading, hide results and errors
+                loadingDiv.style.display = 'block';
+                resultDiv.style.display = 'none';
+                errorDiv.style.display = 'none';
                 
-                // Simulate API call for demo (in real app, use the actual API)
-                setTimeout(() => {
-                    // In a real implementation, you would use:
-                    // const encodedUrl = encodeURIComponent(fbUrl);
-                    // const apiUrl = `https://rest-lily.vercel.app/api/downloader/fbdownload?url=${encodedUrl}`;
-                    
-                    // For demo purposes, we'll simulate a response
-                    const demoResponse = {
-                        status: true,
-                        creator: "@Hillary Abigail",
-                        data: "https://dl.snapcdn.app/download?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJodHRwczovL3ZpZGVvLmZoYW4xNS0xLmZuYS5mYmNkbi5uZXQvbzEvdi90Mi9mMi9tMzY2L0FRTXAzZ2ZESmdJRHB2SDl4Mlptc3l6aU5veW1nYlUwbzBZc3otdUJSVU9xTVhhQnVtTHVyNGJfZUpZazNVZ195NWVpNmprbFpKQW1RVjNZM2c0NFlCMjNRU19USF9kYjV3WHJKZzZDS2w2R1hRLm1wND9fbmNfY2F0PTEwNSZfbmNfb2M9QWRuVDNBRnlvWjdZNU1YYXAtb2l5bTdWUW56V0FzT3dLcHBtRThRdWZwQzNmejUyZ18wZHkwR01Sekc1Vk1TSGJvTSZfbmNfc2lkPTVlOTg1MSZfbmNfaHQ9dmlkZW8uZmhhbjE1LTEuZm5hLmZiY2RuLm5ldCZfbmNfb2hjPWxtcnljUWhPakhBUTdrTnZ3SE5mMnMxJmVmZz1leUoyWlc1amIyUmxYM1JoWnlJNkluaHdkbDl3Y205bmNtVnpjMmwyWlM1R1FVTkZRazlQU3k0dVF6TXVOVGMyTG1SaGMyaGZhREkyTkMxaVlYTnBZeTFuWlc0eVh6Y3lNSEFpTENKNGNIWmZZWE56WlhSZmFXUWlPakV3TnpBMk1ERXlNRGd3T0RRME1EQXNJblpwWDNWelpXTmhjMlZmYVdRaU9qRXdNVEl5TENKa2RYSmhkR2x2Ymw5eklqbzFNemtzSW5WeWJHZGxibDl6YjNWeVkyVWlPaUozZDNjaWZRJTNEJTNEJmNjYj0xNy0xJnZzPTU1NGY2ZGYzMTMzMGI1ZDImX25jX3ZzPUhCa3NGUUlZUldaaVgyVndhR1Z0WlhKaGJDOUJNalF6UmtSR1FqazBRVEk0T1RoQlJqVTFNRGM0TURsRk4wWkNPVFk0UWw5dGRGOHhYM1pwWkdWdlgyUmhjMmhwYm1sMExtMXdOQlVBQXNnQkVnQVZBaGc2Y0dGemMzUm9jbTkxWjJoZlpYWmxjbk4wYjNKbEwwZEVYMVZCUW5sWU1qUkVNM1JoYTBWQlVGTXRSVEoxZG5KRVNYbGlkalJIUVVGQlJoVUNBc2dCRWdBb0FCZ0FHd0tJQjNWelpWOXZhV3dCTVJKd2NtOW5jbVZ6YzJsMlpWOXlaV05wY0dVQk1SVUFBQ2JnM3FITG1PM21BeFVDS0FKRE15d1hRSURmTXpNek16TVlHV1JoYzJoZmFESTJOQzFpWVhOcFl5MW5aVzR5WHpjeU1IQVJBSFVDWlpTZUFRQSZfbmNfenQ9Mjgmb2g9MDBfQWZTaVBHbnFLLWNEbXVzVUtsMVlfU2ptaWJDQU5VdHNJd2M5X29zODNkQTNadyZvZT02ODgxMEMzMyZkbD0xIiwiZmlsZW5hbWUiOiJTbmFwU2F2ZV9BUU1wM2dmREpnSURwdkg5eDJabXN5emlOb3ltZ2JVMG8wWXN6LXVCUlVPcU1YYUJ1bUx1cjRiX2VKWWszVWdfeTVlaTZqa2xaSkFtUVYzWTNnNDRZQjIzUVNfVEhfZGI1d1hySmc2Q0tsNkdYUV83MjBwXyhIRCkubXA0IiwibmJmIjoxNzUyOTA3NTc0LCJleHAiOjE3NTI5MTExNzQsImlhdCI6MTc1MjkwNzU3NH0.k3mPpfz3lSFFl8dsF-KBUKdnj3R8BnKa3feifkgwT3w"
-                    };
-                    
-                    loading.style.display = 'none';
-                    
-                    // Update UI with response
-                    creatorName.textContent = demoResponse.creator;
-                    downloadLink.href = demoResponse.data;
-                    
-                    // Show result
-                    resultContainer.style.display = 'block';
-                }, 1500);
-            });
+                // Encode the URL for API request
+                const encodedUrl = encodeURIComponent(fbUrl);
+                const apiUrl = `https://rest-lily.vercel.app/api/downloader/fbdownload?url=${encodedUrl}`;
+                
+                fetch(apiUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (!data.status) {
+                            throw new Error(data.error || 'Failed to fetch video information');
+                        }
+                        
+                        // Display video information
+                        displayVideoInfo(data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showError(error.message || 'Failed to fetch video information. Please try again.');
+                    })
+                    .finally(() => {
+                        loadingDiv.style.display = 'none';
+                    });
+            }
+            
+            function isValidFacebookUrl(url) {
+                // Basic validation for Facebook URLs
+                return url.includes('facebook.com') || url.includes('fb.watch');
+            }
+            
+            function displayVideoInfo(data) {
+                // Set basic video info
+                videoTitle.textContent = 'Facebook Video';
+                
+                // Set creator if available
+                if (data.creator) {
+                    videoCreator.textContent = `Creator: ${data.creator}`;
+                } else {
+                    videoCreator.textContent = '';
+                }
+                
+                // Clear previous download buttons
+                buttonsContainer.innerHTML = '';
+                
+                // Create download button
+                if (data.data) {
+                    const btn = document.createElement('a');
+                    btn.href = data.data;
+                    btn.className = 'download-btn';
+                    btn.textContent = 'Download Video (HD)';
+                    btn.download = true;
+                    btn.target = '_blank';
+                    buttonsContainer.appendChild(btn);
+                }
+                
+                // Show the result section
+                resultDiv.style.display = 'block';
+            }
             
             function showError(message) {
                 errorDiv.textContent = message;
                 errorDiv.style.display = 'block';
+                resultDiv.style.display = 'none';
+                loadingDiv.style.display = 'none';
             }
-            
-            // For demo purposes - auto-populate with example URL
-            fbUrlInput.value = "https://www.facebook.com/share/v/16itmznFpN/";
         });
     </script>
 </body>
