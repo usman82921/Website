@@ -3,349 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook Video Downloader</title>
+    <title>Telenor Quiz Answers</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
         body {
-            background-color: #f0f2f5;
-            color: #1c1e21;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
-        }
-        
-        .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            background-color: #f5f5f5;
         }
-        
-        header {
+        .header {
+            background-color: #0088cc;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
             text-align: center;
-            margin-bottom: 30px;
-            padding: 20px 0;
-        }
-        
-        h1 {
-            color: #1877f2;
-            margin-bottom: 10px;
-        }
-        
-        .description {
-            color: #65676b;
             margin-bottom: 20px;
         }
-        
-        .download-form {
+        .quiz-container {
             background-color: white;
-            border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        
-        .input-group {
-            display: flex;
-            margin-bottom: 15px;
-        }
-        
-        input[type="url"] {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #dddfe2;
-            border-radius: 6px 0 0 6px;
-            font-size: 16px;
-            outline: none;
-        }
-        
-        input[type="url"]:focus {
-            border-color: #1877f2;
-        }
-        
-        button {
-            background-color: #1877f2;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 0 6px 6px 0;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-        
-        button:hover {
-            background-color: #166fe5;
-        }
-        
-        .result {
-            display: none;
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .video-info {
-            display: flex;
+        .question {
             margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
         }
-        
-        .thumbnail {
-            width: 150px;
-            height: 150px;
-            border-radius: 4px;
-            object-fit: cover;
-            margin-right: 20px;
+        .answer {
+            color: #2ecc71;
+            font-weight: bold;
+            margin-left: 15px;
         }
-        
-        .video-details {
-            flex: 1;
+        .date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            text-align: center;
         }
-        
-        .video-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        
-        .creator {
-            color: #65676b;
-            margin-bottom: 10px;
-        }
-        
-        .download-options {
-            margin-top: 20px;
-        }
-        
-        .download-btn {
-            display: inline-block;
-            background-color: #42b72a;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            transition: background-color 0.3s;
-        }
-        
-        .download-btn:hover {
-            background-color: #36a420;
-        }
-        
         .loading {
             text-align: center;
-            display: none;
-            margin: 20px 0;
-        }
-        
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            border-top: 4px solid #1877f2;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .error {
-            color: #ff4d4f;
-            background-color: #fff2f0;
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 15px;
-            display: none;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            color: #65676b;
-            font-size: 14px;
-        }
-        
-        @media (max-width: 600px) {
-            .video-info {
-                flex-direction: column;
-            }
-            
-            .thumbnail {
-                width: 100%;
-                height: auto;
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-            
-            .input-group {
-                flex-direction: column;
-            }
-            
-            input[type="url"] {
-                border-radius: 6px;
-                margin-bottom: 10px;
-            }
-            
-            button {
-                border-radius: 6px;
-                width: 100%;
-            }
+            padding: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Facebook Video Downloader</h1>
-            <p class="description">Download high-quality videos from Facebook to your device</p>
-        </header>
-        
-        <div class="download-form">
-            <div class="input-group">
-                <input type="url" id="fb-url" placeholder="Paste Facebook video URL here..." required>
-                <button id="download-btn">Download</button>
-            </div>
-            <div class="error" id="error-message"></div>
-        </div>
-        
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>Fetching video information...</p>
-        </div>
-        
-        <div class="result" id="result">
-            <div class="video-info">
-                <img src="https://via.placeholder.com/150" alt="Video thumbnail" class="thumbnail" id="thumbnail">
-                <div class="video-details">
-                    <h3 class="video-title" id="video-title">Facebook Video</h3>
-                    <p class="creator" id="video-creator"></p>
-                </div>
-            </div>
-            
-            <div class="download-options" id="download-options">
-                <h3>Download Options:</h3>
-                <div id="buttons-container"></div>
-            </div>
-        </div>
-        
-        <footer>
-            <p>© 2023 Facebook Video Downloader. This tool is for personal use only.</p>
-        </footer>
+    <div class="header">
+        <h1>📚 Telenor Quiz Answers</h1>
     </div>
-    
+
+    <div id="main-content">
+        <div class="loading">Loading questions...</div>
+    </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const downloadBtn = document.getElementById('download-btn');
-            const fbUrlInput = document.getElementById('fb-url');
-            const resultDiv = document.getElementById('result');
-            const loadingDiv = document.getElementById('loading');
-            const errorDiv = document.getElementById('error-message');
-            const thumbnailImg = document.getElementById('thumbnail');
-            const videoTitle = document.getElementById('video-title');
-            const videoCreator = document.getElementById('video-creator');
-            const buttonsContainer = document.getElementById('buttons-container');
-            
-            downloadBtn.addEventListener('click', fetchVideoInfo);
-            
-            function fetchVideoInfo() {
-                const fbUrl = fbUrlInput.value.trim();
-                
-                if (!fbUrl) {
-                    showError('Please enter a Facebook video URL');
-                    return;
-                }
-                
-                // Validate Facebook URL
-                if (!isValidFacebookUrl(fbUrl)) {
-                    showError('Please enter a valid Facebook video URL');
-                    return;
-                }
-                
-                // Show loading, hide results and errors
-                loadingDiv.style.display = 'block';
-                resultDiv.style.display = 'none';
-                errorDiv.style.display = 'none';
-                
-                // Encode the URL for API request
-                const encodedUrl = encodeURIComponent(fbUrl);
-                const apiUrl = `https://rest-lily.vercel.app/api/downloader/fbdownload?url=${encodedUrl}`;
-                
-                fetch(apiUrl)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (!data.status) {
-                            throw new Error(data.error || 'Failed to fetch video information');
-                        }
-                        
-                        // Display video information
-                        displayVideoInfo(data);
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        showError(error.message || 'Failed to fetch video information. Please try again.');
-                    })
-                    .finally(() => {
-                        loadingDiv.style.display = 'none';
-                    });
+        // API سے ڈیٹا fetch کرنے کا فنکشن
+        async function fetchQuizData() {
+            try {
+                const response = await fetch('http://paktrickowner.serv00.net/Api.php');
+                return await response.json();
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                return null;
             }
-            
-            function isValidFacebookUrl(url) {
-                // Basic validation for Facebook URLs
-                return url.includes('facebook.com') || url.includes('fb.watch');
+        }
+
+        // ڈیٹا ڈسپلے کرنے کا فنکشن
+        async function displayQuizData() {
+            const quizData = await fetchQuizData();
+            const mainContent = document.getElementById('main-content');
+
+            if (quizData && quizData.quiz) {
+                const currentDate = new Date().toLocaleDateString('en-GB');
+                let html = `
+                    <div class="date">📅 Date: ${currentDate}</div>
+                    <div class="quiz-container">
+                        <h3>📋 Questions & Answers:</h3>
+                `;
+
+                quizData.quiz.forEach((item, index) => {
+                    html += `
+                        <div class="question">
+                            ${index + 1}. ${item.question}
+                            <div class="answer">✅ ${item.answer}</div>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+                mainContent.innerHTML = html;
+            } else {
+                mainContent.innerHTML = '<div class="quiz-container">Failed to load questions. Please try again later.</div>';
             }
-            
-            function displayVideoInfo(data) {
-                // Set basic video info
-                videoTitle.textContent = 'Facebook Video';
-                
-                // Set creator if available
-                if (data.creator) {
-                    videoCreator.textContent = `Creator: ${data.creator}`;
-                } else {
-                    videoCreator.textContent = '';
-                }
-                
-                // Clear previous download buttons
-                buttonsContainer.innerHTML = '';
-                
-                // Create download button
-                if (data.data) {
-                    const btn = document.createElement('a');
-                    btn.href = data.data;
-                    btn.className = 'download-btn';
-                    btn.textContent = 'Download Video (HD)';
-                    btn.download = true;
-                    btn.target = '_blank';
-                    buttonsContainer.appendChild(btn);
-                }
-                
-                // Show the result section
-                resultDiv.style.display = 'block';
-            }
-            
-            function showError(message) {
-                errorDiv.textContent = message;
-                errorDiv.style.display = 'block';
-                resultDiv.style.display = 'none';
-                loadingDiv.style.display = 'none';
-            }
-        });
+        }
+
+        // صفحہ لوڈ ہوتے ہی ڈیٹا ڈسپلے کریں
+        window.onload = displayQuizData;
     </script>
 </body>
 </html>
